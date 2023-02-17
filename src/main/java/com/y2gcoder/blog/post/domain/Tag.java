@@ -4,12 +4,16 @@ import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
-class Tag {
+public class Tag {
     private final String name;
 
     public Tag(String name) {
         if (!StringUtils.hasText(name)) throw new IllegalArgumentException("no post tag name");
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

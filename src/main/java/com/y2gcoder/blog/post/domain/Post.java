@@ -3,8 +3,6 @@ package com.y2gcoder.blog.post.domain;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +10,7 @@ public class Post {
     private final PostId id;
     private String title;
     private PostContent content;
-    private List<Tag> tags;
+    private Tags tags;
     private PostState state;
     private final Author author;
     private final LocalDateTime writtenAt;
@@ -40,15 +38,17 @@ public class Post {
                           String title,
                           PostContent content,
                           List<Tag> tags,
-                          Author author) {
+                          PostState state,
+                          Author author,
+                          LocalDateTime writtenAt) {
         return new Post(
                 id,
                 title,
                 content,
                 tags,
-                PostState.VISIBLE,
+                state,
                 author,
-                LocalDateTime.now()
+                writtenAt
         );
     }
 
@@ -88,8 +88,20 @@ public class Post {
         return content;
     }
 
-    public List<Tag> getTags() {
-        return Collections.unmodifiableList(tags);
+    public Tags getTags() {
+        return tags;
+    }
+
+    public PostState getState() {
+        return state;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public LocalDateTime getWrittenAt() {
+        return writtenAt;
     }
 
     private void setTitle(String title) {
@@ -103,8 +115,7 @@ public class Post {
     }
 
     private void setTags(List<Tag> tags) {
-        if (tags == null) throw new IllegalArgumentException("no tags");
-        this.tags = new ArrayList<>(tags);
+        this.tags = new Tags(tags);
     }
 
     @Override

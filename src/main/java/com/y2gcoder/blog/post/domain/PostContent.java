@@ -4,12 +4,16 @@ import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
-class PostContent {
+public class PostContent {
     private final String content;
 
     public PostContent(String content) {
         if (!StringUtils.hasText(content)) throw new IllegalArgumentException("no contents");
         this.content = content;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     @Override
