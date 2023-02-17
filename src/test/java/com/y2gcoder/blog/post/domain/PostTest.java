@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,13 +19,15 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //when
-        Post aut = Post.of(id, title, content, tags, author);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //then
         assertEquals(id, aut.getId());
@@ -37,13 +40,15 @@ class PostTest {
         //given
         String title = "title";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //expected
-        assertThrows(IllegalArgumentException.class, () -> Post.of(null, title, content, tags, author));
+        assertThrows(IllegalArgumentException.class, () -> Post.of(null, title, content, tags, state, author, writtenAt));
     }
 
     @Test
@@ -53,13 +58,15 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //expected
-        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, content, tags, author));
+        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, content, tags, state, author, writtenAt));
     }
 
     @Test
@@ -68,13 +75,15 @@ class PostTest {
         //given
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //expected
-        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, null, tags, author));
+        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, null, tags, state, author, writtenAt));
     }
 
     @Test
@@ -84,12 +93,14 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //expected
-        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, content, null, author));
+        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, content, null, state, author, writtenAt));
     }
 
     @Test
@@ -100,9 +111,13 @@ class PostTest {
         String title = "title";
         PostContent content = new PostContent("content");
         List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
 
         //expected
-        assertThrows(IllegalArgumentException.class, () -> Post.of(id, title, content, tags, null));
+        assertThrows(IllegalArgumentException.class,
+                () -> Post.of(id, title, content, tags, state, null, writtenAt));
+
     }
 
     @Test
@@ -112,11 +127,13 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         String newTitle = "new title";
@@ -133,11 +150,13 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         PostContent newContent = new PostContent("새로운 content");
@@ -154,11 +173,13 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
+        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
+        PostState state = PostState.VISIBLE;
         MemberId authorId = new MemberId(UUID.randomUUID().toString());
         String authorName = "author";
         Author author = new Author(authorId, authorName);
-        List<Tag> tags = List.of(new Tag("tag1"), new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         Tag newTag1 = new Tag("newTag1");
@@ -168,7 +189,7 @@ class PostTest {
         newTags.add(newTag2);
         aut.change(title, content, newTags);
         //then
-        Assertions.assertThat(aut.getTags())
+        Assertions.assertThat(aut.getTags().getTags())
                 .containsExactlyInAnyOrder(newTag1, newTag2);
     }
 
@@ -179,19 +200,21 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
-        MemberId authorId = new MemberId(UUID.randomUUID().toString());
-        String authorName = "author";
-        Author author = new Author(authorId, authorName);
         List<Tag> tags = new ArrayList<>();
         tags.add(new Tag("tag1"));
         tags.add(new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        PostState state = PostState.VISIBLE;
+        MemberId authorId = new MemberId(UUID.randomUUID().toString());
+        String authorName = "author";
+        Author author = new Author(authorId, authorName);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         tags.clear();
 
         //then
-        assertEquals(2, aut.getTags().size());
+        assertEquals(2, aut.getTags().getTags().size());
     }
 
     @Test
@@ -201,13 +224,15 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
-        MemberId authorId = new MemberId(UUID.randomUUID().toString());
-        String authorName = "author";
-        Author author = new Author(authorId, authorName);
         List<Tag> tags = new ArrayList<>();
         tags.add(new Tag("tag1"));
         tags.add(new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        PostState state = PostState.VISIBLE;
+        MemberId authorId = new MemberId(UUID.randomUUID().toString());
+        String authorName = "author";
+        Author author = new Author(authorId, authorName);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         aut.hide();
@@ -223,13 +248,15 @@ class PostTest {
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
         PostContent content = new PostContent("content");
-        MemberId authorId = new MemberId(UUID.randomUUID().toString());
-        String authorName = "author";
-        Author author = new Author(authorId, authorName);
         List<Tag> tags = new ArrayList<>();
         tags.add(new Tag("tag1"));
         tags.add(new Tag("tag2"));
-        Post aut = Post.of(id, title, content, tags, author);
+        PostState state = PostState.VISIBLE;
+        MemberId authorId = new MemberId(UUID.randomUUID().toString());
+        String authorName = "author";
+        Author author = new Author(authorId, authorName);
+        LocalDateTime writtenAt = LocalDateTime.of(2023, 2, 17, 14, 4);
+        Post aut = Post.of(id, title, content, tags, state, author, writtenAt);
 
         //when
         aut.delete();

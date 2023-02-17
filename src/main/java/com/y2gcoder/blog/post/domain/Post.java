@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public final class Post {
+public class Post {
     private final PostId id;
     private String title;
     private PostContent content;
@@ -38,15 +38,17 @@ public final class Post {
                           String title,
                           PostContent content,
                           List<Tag> tags,
-                          Author author) {
+                          PostState state,
+                          Author author,
+                          LocalDateTime writtenAt) {
         return new Post(
                 id,
                 title,
                 content,
                 tags,
-                PostState.VISIBLE,
+                state,
                 author,
-                LocalDateTime.now()
+                writtenAt
         );
     }
 
@@ -86,8 +88,20 @@ public final class Post {
         return content;
     }
 
-    public List<Tag> getTags() {
-        return tags.getTags();
+    public Tags getTags() {
+        return tags;
+    }
+
+    public PostState getState() {
+        return state;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public LocalDateTime getWrittenAt() {
+        return writtenAt;
     }
 
     private void setTitle(String title) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class Tags {
+public class Tags {
     private final List<Tag> tags;
 
     public Tags(List<Tag> tags) {

@@ -1,5 +1,5 @@
 package com.y2gcoder.blog.post.domain;
 
-enum PostState {
+public enum PostState {
     VISIBLE, HIDDEN, DELETED
 }
