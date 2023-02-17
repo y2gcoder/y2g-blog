@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Post {
-    private PostId id;
+    private final PostId id;
     private String title;
     private PostContent content;
     private List<Tag> tags;
@@ -25,7 +25,8 @@ public class Post {
                  PostState state,
                  Author author,
                  LocalDateTime writtenAt) {
-        setId(id);
+        if (id == null) throw new IllegalArgumentException("no postId");
+        this.id = id;
         setTitle(title);
         setContent(content);
         setTags(tags);
@@ -89,11 +90,6 @@ public class Post {
 
     public List<Tag> getTags() {
         return Collections.unmodifiableList(tags);
-    }
-
-    private void setId(PostId id) {
-        if (id == null) throw new IllegalArgumentException("no postId");
-        this.id = id;
     }
 
     private void setTitle(String title) {
