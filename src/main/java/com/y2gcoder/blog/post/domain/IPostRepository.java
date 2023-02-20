@@ -8,6 +8,8 @@ public interface IPostRepository {
 
     Optional<Post> findById(PostId id);
 
+    void update(Post post);
+
     default PostId nextPostId() {
         return new PostId(UUID.randomUUID().toString());
     }

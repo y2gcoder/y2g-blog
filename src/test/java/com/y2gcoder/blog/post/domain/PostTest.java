@@ -122,7 +122,7 @@ class PostTest {
 
     @Test
     @DisplayName("게시글 도메인: 제목을 바꿀 수 있다.")
-    void givenNewTitle_whenChange_thenPostHasNewTitle() {
+    void givenNewTitle_whenUpdate_thenPostHasNewTitle() {
         //given
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
@@ -137,7 +137,7 @@ class PostTest {
 
         //when
         String newTitle = "new title";
-        aut.change(newTitle, content, tags);
+        aut.update(newTitle, content, tags);
 
         //then
         assertEquals(newTitle, aut.getTitle());
@@ -145,7 +145,7 @@ class PostTest {
 
     @Test
     @DisplayName("게시글 도메인: content를 바꿀 수 있다.")
-    void givenChangedContent_whenChange_thenPostHasChangedContent() {
+    void givenChangedContent_whenUpdate_thenPostHasChangedContent() {
         //given
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
@@ -160,7 +160,7 @@ class PostTest {
 
         //when
         PostContent newContent = new PostContent("새로운 content");
-        aut.change(title, newContent, tags);
+        aut.update(title, newContent, tags);
 
         //then
         assertEquals(newContent, aut.getContent());
@@ -168,7 +168,7 @@ class PostTest {
 
     @Test
     @DisplayName("게시글 도메인: 태그들을 바꿀 수 있다.")
-    void givenNewTags_whenChange_thenPostHasNewTags() {
+    void givenNewTags_whenUpdate_thenPostHasNewTags() {
         //given
         PostId id = new PostId(UUID.randomUUID().toString());
         String title = "title";
@@ -187,7 +187,7 @@ class PostTest {
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag1);
         newTags.add(newTag2);
-        aut.change(title, content, newTags);
+        aut.update(title, content, newTags);
         //then
         Assertions.assertThat(aut.getTags().getTags())
                 .containsExactlyInAnyOrder(newTag1, newTag2);

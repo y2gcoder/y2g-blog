@@ -56,4 +56,10 @@ public class PostDataModel extends BaseTimeEntity {
                 writtenAt
         );
     }
+
+    public void update(Post post) {
+        this.title = post.getTitle();
+        this.content = post.getContent().getContent();
+        this.tags = post.getTags();
+    }
 }

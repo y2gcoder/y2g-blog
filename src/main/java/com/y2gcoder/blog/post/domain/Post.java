@@ -52,7 +52,7 @@ public class Post {
         );
     }
 
-    public void change(String title,
+    public void update(String title,
                        PostContent content,
                        List<Tag> tags) {
         setTitle(title);
