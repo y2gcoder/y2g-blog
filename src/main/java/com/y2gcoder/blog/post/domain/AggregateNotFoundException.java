@@ -13,6 +13,6 @@ public class AggregateNotFoundException extends BusinessException {
 
     @Override
     public String getErrorCode() {
-        return HttpStatus.BAD_REQUEST.toString();
+        return HttpStatus.BAD_REQUEST.name();
     }
 }
